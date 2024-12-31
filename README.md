@@ -103,10 +103,4 @@ Go to the original repository and click on "New Pull Request."
 Select your fork and branch, and provide a detailed description of your changes.
 Address Feedback
 
-If maintainers leave comments, address them promptly.
-Contribution Guidelines
-Write clear and concise commit messages.
-Follow coding standards and best practices.
-Ensure your code passes linting and tests.
-Be respectful and collaborative in code reviews.
-Thank you for contributing to this project! Together, we can create a robust, user-friendly ecommerce platform.
+
