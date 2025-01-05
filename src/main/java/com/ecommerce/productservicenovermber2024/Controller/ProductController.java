@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController                           //Restcontroller tells spring that this is a special class.
 @RequestMapping("/Product")
@@ -38,7 +37,6 @@ public class ProductController {
     //get all products
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts(){
-
         ResponseEntity<List<Product>> responseEntity=new ResponseEntity<>(
                 productService.getAllProducts(),
                 HttpStatus.OK
@@ -46,8 +44,13 @@ public class ProductController {
         return responseEntity;
 
     }
+    //Create the new Product
+    @PostMapping
+    public Product addNewProduct(@RequestBody Product product){
+       return productService.addNewProduct(product);
+    }
 
-
+    //delete product with id
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable("id")Long id) throws ProductNotFoundException {
         productService.deleteSingleProduct(id);

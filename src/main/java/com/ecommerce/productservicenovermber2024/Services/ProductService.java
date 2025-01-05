@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductService {
 
-     Product getSingleProduct(Long productId) throws ProductNotFoundException;
+     Product getSingleProduct(Long productId) ;
 
      List<Product> getAllProducts();
 
@@ -16,5 +16,7 @@ public interface ProductService {
      Product replaceProduct(Long id, Product product) throws ProductNotFoundException;
 
      void deleteSingleProduct(Long id) throws ProductNotFoundException;
+
+     Product addNewProduct(Product product);
 
 }

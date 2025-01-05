@@ -24,9 +24,8 @@ public class DbProductService implements ProductService {
 
 
     @Override
-    public Product getSingleProduct(Long productId) throws ProductNotFoundException {
+    public Product getSingleProduct(Long productId)  {
         Optional<Product> optionalProduct = productRepository.findById(productId);
-
         if(optionalProduct.isEmpty()){
              throw new ProductNotFoundException("Product with id " +productId+"does not exist" );
         }
@@ -38,7 +37,6 @@ public class DbProductService implements ProductService {
          return productRepository.findAll();
 
     }
-
 
     @Override
     public Product updateProduct(Long product_id, Product product) throws ProductNotFoundException {
@@ -82,14 +80,24 @@ public class DbProductService implements ProductService {
 
         @Override
         public void deleteSingleProduct(Long product_id) throws ProductNotFoundException {
-     Optional<Product>productOptional=productRepository.findById(product_id);
-     if(productOptional.isEmpty()){
+        Optional<Product>productOptional=productRepository.findById(product_id);
+        if(productOptional.isEmpty()){
          throw new ProductNotFoundException("Product with id " +product_id+"does not exist" );
      }
          //productRepository.deleteById(product_id);
         productRepository.delete(productOptional.get());
     }
 
+    @Override
+    public Product addNewProduct(Product product) {
+    Category category=product.getCategory();
+    if(category.getId()==null){
+        category=categoryRepository.save(category);
+        product.setCategory(category);
+
+    }
+    return productRepository.save(product);
+    }
 
 
 }

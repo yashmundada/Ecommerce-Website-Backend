@@ -1,5 +1,6 @@
 package com.ecommerce.productservicenovermber2024.ControllerAdvice;
 
+import com.ecommerce.productservicenovermber2024.Exception.ErrorResponse;
 import com.ecommerce.productservicenovermber2024.Exception.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +28,12 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<String> handleProductNotFoundExceptionException() {
-        ResponseEntity<String> responseEntity = new ResponseEntity<>(
-                "ProductNotFoundException from GlobalExceptionHandler",
-                HttpStatus.BAD_REQUEST
-        );
-        return responseEntity;
+    public ResponseEntity<ErrorResponse> handleProductNotFoundExceptionException(ProductNotFoundException ex)
+     {
+     String message = ex.getMessage();
+     ErrorResponse response = ErrorResponse.builder().message(message).success(false).status(HttpStatus.NOT_FOUND).build();
+     return new ResponseEntity<ErrorResponse>(response,HttpStatus.NOT_FOUND);
+
+
     }
 }
